@@ -1,0 +1,86 @@
+@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&family=Raleway:wght@600&display=swap");
+:root {
+  --size: 40;
+  --unit: calc((var(--size) / 100) * 1vmin);
+  font-family: 'Raleway', sans-serif;
+}
+
+#page {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#characters {
+  height: calc(180 * var(--unit));
+  width: calc(120 * var(--unit));
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  border-radius: 8% / 6%;
+  -webkit-box-shadow: 1em 1em 2em #222831;
+          box-shadow: 1em 1em 2em #222831;
+}
+
+#characters h2 {
+  font-size: calc(10 * var(--unit));
+  margin: 8% 0 2% 6%;
+}
+
+#characters h3 {
+  font-size: calc(8 * var(--unit));
+  text-align: right;
+  margin-right: 5%;
+}
+
+#characters .mediaContainer {
+  height: 60%;
+  background: -webkit-gradient(linear, left bottom, left top, color-stop(1%, whitesmoke), to(transparent));
+  background: linear-gradient(0deg, whitesmoke 1%, transparent);
+  -webkit-clip-path: polygon(0% 7%, 100% 0%, 100% 100%, 0% 100%);
+          clip-path: polygon(0% 7%, 100% 0%, 100% 100%, 0% 100%);
+}
+
+img {
+  margin: 4% 0% 0% 10%;
+  max-width: calc(100 * var(--unit));
+  height: auto;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+#input {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.title {
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: calc(10 * var(--unit));
+}
+/*# sourceMappingURL=styles.css.map */
