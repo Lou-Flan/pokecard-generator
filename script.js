@@ -18,34 +18,48 @@ const pokemonTypeColours = {
     steel: '#5f6769',
     water: '#9aceff'
 }
+var cardDiv = document.getElementById("characters");
+var pokeBall = document.getElementById('pokeball-container');
+
+function randomIdNumber(){
+    return Math.floor(Math.random() * Math.floor(307));
+}
 
 // THIS WORKS :)
-// function getCharacter(event) {
-    
-// 	event.preventDefault()
-// 	let numberInput = document.getElementById("number-input");
-//     var pokemonId = numberInput.value.trim();
-// 	if (pokemonId) {
-// 		getCharacters(pokemonId)
-// 	}
-// }
-// document.getElementById("submit-number").addEventListener("click", getCharacter)
+function getCharacter(event) {
+	event.preventDefault()
+	let numberInput = document.getElementById("number-input");
+    // var pokemonId = numberInput.value.trim();
+    var pokemonId = randomIdNumber();
+    // console.log(pokemonId);
+	if (pokemonId) {
+		getCharacters(pokemonId)
+	}
+}
 
-// CHANGE 1 TO  pokemonId and input in args too
-function getCharacters() {
-    fetch(`https://pokeapi.co/api/v2/pokemon/${620}/`)
+document.getElementById("submit-number").addEventListener("click", getCharacter);
+
+function getCharacters(pokemonId) {
+    fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}/`)
     .then((response) => response.json())
 	.then((data) => showCard(data))
 	.catch((error) => console.log(error))
 }
 
+function getMoveData(url) {
+    fetch(url)
+    .then((response) => response.json())
+	.then((data) => showMoveData(data))
+	.catch((error) => console.log(error))
+}
+
 
 function showCard(data) {
-	let cardDiv = document.getElementById("characters");
+    pokeBall.style.display = 'none';
 	cardDiv.innerHTML = null;
 
     var pokemonName = document.createElement("h2");
-    pokemonName.textContent = data.name;
+    pokemonName.textContent = `${data.name.toUpperCase()}`;
     
     let mediaContainer = document.createElement('div');
     mediaContainer.setAttribute('class', 'mediaContainer');
@@ -63,13 +77,35 @@ function showCard(data) {
     pokemonTypeTitle.textContent = pokemonType;
     cardDiv.appendChild(pokemonTypeTitle);
 
-    setBackgroundColour(mediaContainer, pokemonType);
-    setTextColour([pokemonName, pokemonTypeTitle], pokemonType);
+    // var pokemonMoves = data.moves[0].move.name;
+    // console.log(data.moves[0])
+    // var cardBodyText = document.createElement('p');
+    // cardBodyText.textContent = `${pokemonMoves.toUpperCase()}`;
+    // cardDiv.appendChild(cardBodyText);
+    // // console.log(data.moves[0].move.url);
+    getMoveData(data.moves[0].move.url);
 
+    setBackgroundColour(mediaContainer, pokemonType);
+    setTextColour([pokemonTypeTitle], pokemonType);
+    cardDiv.style.visibility = 'visible';
 };
 
+function showMoveData(data) {
+    var pokemonMoves = data.name;
+    var cardBodyText = document.createElement('div');
+    var moveData = data.flavor_text_entries[2].flavor_text;
+    cardBodyText.innerHTML = `<p>${pokemonMoves.toUpperCase()}</p><br><p id="inner">${moveData}</p>`;
+    cardDiv.appendChild(cardBodyText);
+}
+
+function reset() {
+    cardDiv.style.visibility = 'hidden';
+    pokeBall.style.display = 'block'
+}
+
+cardDiv.addEventListener("click", reset);
+
 function setBackgroundColour(element, data){
-    // element.style.background = pokemonTypeColours[data];
     element.style.background = `linear-gradient(0deg, white 10%, ${pokemonTypeColours[data]})`;
 }
 
@@ -77,34 +113,4 @@ function setTextColour(element, data){
     element.forEach((item) => {
         item.style.color = pokemonTypeColours[data];
     })
-        
-    // args.style.color = pokemonTypeColours[data];
 }
-
-// // to show single character info
-// function handleCharacterClick(character){
-// 	console.log("character from handleCharacterClick:", character)
-// 	let cardDiv = document.getElementById("characters")
-// 	cardDiv.innerHTML = null
-// 	let charDiv = document.createElement("div")
-// 	let pokemonName = document.createElement("h2")
-// 	pokemonName.textContent = character.name
-// 	// add character image
-// 	let pokemonImage = document.createElement("img")
-// 	pokemonImage.setAttribute("src",character.image)
-// 	pokemonImage.setAttribute("alt",character.name)
-// 	// append to the DOM
-// 	charDiv.appendChild(pokemonName)
-// 	charDiv.appendChild(pokemonImage)
-// 	let charInfoDiv = document.createElement("div")
-// 	charInfoDiv.innerHTML = `<p>Status: ${character.status}</p>`
-// 	charInfoDiv.innerHTML += `<p>Species: ${character.species}</p>`
-// 	charInfoDiv.innerHTML +=`<p>Location: ${character.location.name}</p>`
-// 	charDiv.appendChild(charInfoDiv)
-// 	cardDiv.appendChild(charDiv)
-// }
-
-// bcos the input type is a submit type, the default behaviour on click is to reload the page. to combat this, the event must be parsed to the function and prevent default specified
-
-
-getCharacters();
