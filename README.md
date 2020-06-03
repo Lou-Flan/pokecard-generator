@@ -9,4 +9,5 @@ To-Do:
 - Clean up functions
 
 Challenges
+
 ✅ As the pokemon images some times take a while to load, I wanted an animation to play while they load in the background. I found this tricky but promises saved the day :)
