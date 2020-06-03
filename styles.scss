@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Fredoka+One&family=Raleway:wght@600&display=swap");
 
+
 :root {
 	--size: 50;
 	--unit: calc((var(--size) / 100) * 1vmin);
@@ -20,9 +21,9 @@
 #page {
 	@include flex(column, nowrap, center, center);
 	height: 100vh;
-	background: rgb(50, 50, 53);
+	background: radial-gradient(circle, #2dfdd4 52%, rgba(34,193,195,1) 82%, rgba(60,154,207,1) 100%);
 }
-#characters {
+#card {
 	@include flex(column, wrap, flex-start, null);
 	visibility: hidden;
 	height: calc(170 * var(--unit));
@@ -33,10 +34,6 @@
 	box-shadow: 1em 1em 2em black;
 	transform: rotate(8deg);
 	transition: box-shadow 1s ease;
-
-	&:hover {
-		box-shadow: 4em 4em 2em black;
-	}
 
 	h2 {
 		color: rgb(58, 58, 63);
@@ -78,73 +75,16 @@ img {
 }
 
 #pokeball-container {
-	animation: wobble 3s infinite both;
+	
 	position: absolute;
 
-	#shadow {
-		animation-play-state: paused;
-		width: calc(50 * var(--unit));
-		height: calc(20 * var(--unit));
-		background-color: black;
-		opacity: 0.2;
-		box-shadow: 0 0 calc(4 * var(--unit)) calc(2 * var(--unit)) black;
-		position: absolute;
-		bottom: -10%;
-		left: 10%;
-		z-index: -1;
-		border-radius: 50%;
-	}
-	button {
-		display: block;
-		height: calc(70 * var(--unit));
-		width: calc(70 * var(--unit));
-		background: linear-gradient(100deg, rgb(184, 184, 184) 0%, white);
-		-webkit-clip-path: circle(50% at 50% 50%);
-		clip-path: circle(50% at 50% 50%);
-		border: none;
-		transform: translate(0%, 50%);
-    border-radius: 50%;
-    animation: wobble 2s infinite both;
-		-webkit-animation: wobble 2s infinite both;
-
-		&::before {
-			position: absolute;
-			bottom: 48%;
-			left: 0%;
-			content: "";
-			border-bottom: calc(4 * var(--unit)) solid rgb(94, 92, 92);
-			height: calc(50 * var(--unit));
-			width: calc(70 * var(--unit));
-			background: linear-gradient(100deg, red 30%, rgb(255, 119, 119));
-			z-index: 3;
-		}
-
-		&::after {
-			position: absolute;
-			bottom: 37%;
-			left: 38%;
-			content: "";
-			height: calc(10 * var(--unit));
-			border-radius: 50%;
-			width: calc(10 * var(--unit));
-			border: calc(4 * var(--unit)) solid rgb(94, 92, 92);
-			background: white;
-			z-index: 3;
-		}
-		&:active,
-		&:focus {
-			border: none;
-			outline: none;
-		}
+	svg{
+		width: calc(80 * var(--unit));
+		height: calc(80 * var(--unit));
+		animation: wobble 3s infinite both;
 	}
 }
 
-#input {
-	width: 100%;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-}
 .title {
 	text-align: center;
 	font-family: Arial, Helvetica, sans-serif;
@@ -208,4 +148,13 @@ img {
 		-webkit-transform: translateX(-6px) rotate(-1.2deg);
 		transform: translateX(-6px) rotate(-1.2deg);
 	}
+}
+
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
 }
